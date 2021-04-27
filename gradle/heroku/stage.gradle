@@ -1,1 +1,3 @@
-task stage(dependsOn: ['clean', 'shadowJar'])
+task stage(dependsOn: ['build', 'shadowJar', 'clean', 'test'])
+build.mustRunAfter clean
+build.mustRunAfter test
