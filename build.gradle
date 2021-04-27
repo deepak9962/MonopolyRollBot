@@ -29,6 +29,6 @@ test {
     useJUnitPlatform()
 }
 
-task stage(dependsOn: ['build', 'shadowJar', 'clean', 'test'])
+task stage(dependsOn: ['build', 'clean', 'test'])
 build.mustRunAfter clean
 build.mustRunAfter test
