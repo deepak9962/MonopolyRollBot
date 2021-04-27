@@ -1,1 +1,1 @@
-worker: java src/main/java/MonopolyRoll.java
+worker: java -jar build/libs/MonopolyRoll-1.0-SNAPSHOT-all.jar

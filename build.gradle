@@ -1,11 +1,8 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
-subprojects {
-    // ...
-    apply from: file("$rootProject.projectDir/gradle/heroku/stage.gradle")
-}
 
 
 group 'com.monopolyRoll.discordBot'
@@ -27,4 +24,19 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+subprojects {
+    // ...
+    apply from: file("$rootProject.projectDir/gradle/heroku/stage.gradle")
+}
+
+task stage(dependsOn: ['build', 'shadowJar', 'clean', 'test'])
+build.mustRunAfter clean
+build.mustRunAfter test
+
+jar {
+    manifest {
+        attributes 'Class-Path': '/libs/MonopolyRoll-1.0-SNAPSHOT-all.jar', 'Main-Class': 'MonopolyRoll'
+    }
 }
