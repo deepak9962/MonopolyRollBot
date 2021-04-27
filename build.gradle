@@ -2,6 +2,12 @@ plugins {
     id 'java'
 }
 
+subprojects {
+    // ...
+    apply from: file("$rootProject.projectDir/gradle/heroku/stage.gradle")
+}
+
+
 group 'com.monopolyRoll.discordBot'
 version '1.0-SNAPSHOT'
 

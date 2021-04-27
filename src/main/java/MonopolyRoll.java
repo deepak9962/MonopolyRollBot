@@ -12,7 +12,7 @@ public class MonopolyRoll extends ListenerAdapter {
 
     public static void main(String[] args) throws LoginException {
 
-        JDA jda = JDABuilder.createDefault("ODM2MDk1NzczNzM3MDkxMDc0.YIZA3g.zLGHKvO7FwB0-BKfINtO5eK7gHo").build();
+        JDA jda = JDABuilder.createDefault(System.getenv("TOKEN")).build();
         jda.addEventListener(new MonopolyRoll());
 
         try {
