@@ -110,9 +110,9 @@ public class MonopolyRoll extends ListenerAdapter {
 
     public int randomMessages(int arraySize) {
 
-        double diceRoll = Math.random();
-        diceRoll = diceRoll * arraySize;
+        double randomNumber = Math.random();
+        randomNumber = randomNumber * arraySize;
 
-        return (int) diceRoll;
+        return (int) randomNumber;
     }
 }
