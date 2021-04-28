@@ -42,7 +42,7 @@ public class MonopolyRoll extends ListenerAdapter {
         }
         
         if (getMessage.equalsIgnoreCase("!invite")) {
-            event.getChannel().sendMessage("https://discord.com/api/oauth2/authorize?client_id=836095773737091074&permissions=268639232&scope=bot").queue();
+            event.getChannel().sendMessage(System.getenv().get("INVITE")).queue();
         }
 
         if (getMessage.equalsIgnoreCase("HelloBot")) {
