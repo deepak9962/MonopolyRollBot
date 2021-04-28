@@ -36,6 +36,10 @@ public class MonopolyRoll extends ListenerAdapter {
             event.getChannel().sendMessage("Total : " + monopolyRoll(6)).queue();
 
         }
+        
+        if (getMessage.equalsIgnoreCase("!help")) {
+            event.getChannel().sendMessage("Just type !roll to activate me -_-, ugh! such headache.").queue();
+        }
 
         if (getMessage.equalsIgnoreCase("HelloBot")) {
             event.getChannel().sendMessage("Fuck me! I'm not in the mood right now. -_-").queue();
