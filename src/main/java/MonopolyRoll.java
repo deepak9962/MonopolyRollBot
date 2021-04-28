@@ -40,6 +40,10 @@ public class MonopolyRoll extends ListenerAdapter {
         if (getMessage.equalsIgnoreCase("!help")) {
             event.getChannel().sendMessage("Just type !roll to activate me -_-, ugh! such headache.").queue();
         }
+        
+        if (getMessage.equalsIgnoreCase("!invite")) {
+            event.getChannel().sendMessage("https://discord.com/api/oauth2/authorize?client_id=836095773737091074&permissions=268639232&scope=bot").queue();
+        }
 
         if (getMessage.equalsIgnoreCase("HelloBot")) {
             event.getChannel().sendMessage("Fuck me! I'm not in the mood right now. -_-").queue();
