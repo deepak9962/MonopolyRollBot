@@ -48,7 +48,7 @@ public class MonopolyRoll extends ListenerAdapter {
         }
 
         if (getMessage.equalsIgnoreCase("HiBot")) {
-            event.getChannel().sendMessage(messages[diceRoll(3)]).queue();
+            event.getChannel().sendMessage(messages[diceRoll(2)]).queue();
         }
     }
 
