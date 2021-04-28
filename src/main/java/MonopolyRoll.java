@@ -3,7 +3,6 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-
 import javax.security.auth.login.LoginException;
 import java.util.Objects;
 
@@ -28,6 +27,9 @@ public class MonopolyRoll extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         super.onGuildMessageReceived(event);
+        String[] messages = {"Fuck me! I'm not in the mood right now. -_-",
+                "Get Lost I said already. Stop bulling me. '-_-'",
+                "Imma MF, leave me alone."};
         eventGlobal = event;
         String getMessage = event.getMessage().getContentRaw();
         if (getMessage.equalsIgnoreCase("!roll")) {
@@ -45,16 +47,8 @@ public class MonopolyRoll extends ListenerAdapter {
             event.getChannel().sendMessage(System.getenv().get("INVITE")).queue();
         }
 
-        if (getMessage.equalsIgnoreCase("HelloBot")) {
-            event.getChannel().sendMessage("Fuck me! I'm not in the mood right now. -_-").queue();
-        }
-
-        if (getMessage.equalsIgnoreCase("hibot")) {
-            event.getChannel().sendMessage("Get Lost I said already. Stop bulling me. '-_-'").queue();
-        }
-
-        if (getMessage.equalsIgnoreCase("who are you bot?")) {
-            event.getChannel().sendMessage("Imma MF, leave me alone.").queue();
+        if (getMessage.equalsIgnoreCase("HiBot")) {
+            event.getChannel().sendMessage(messages[diceRoll(3)]).queue();
         }
     }
 
