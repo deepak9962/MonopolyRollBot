@@ -47,6 +47,8 @@ public class MonopolyRoll extends ListenerAdapter {
             String rolledTotal = "Total : " + monopolyRoll(6);
 
             getMessages(userName, rolledTotal);
+            MonopolyRollAdapter monopolyRollAdapter = new MonopolyRollAdapter();
+            monopolyRollAdapter.getMessage();
         }
 
         if (getMessage.equalsIgnoreCase("!help")) {
@@ -60,9 +62,6 @@ public class MonopolyRoll extends ListenerAdapter {
         if (getMessage.equalsIgnoreCase("HiBot")) {
             event.getChannel().sendMessage(messages[randomMessages(3)]).queue();
         }
-
-        MonopolyRollAdapter monopolyRollAdapter = new MonopolyRollAdapter();
-        monopolyRollAdapter.getMessage();
     }
 
     public int monopolyRoll(int sides) {
