@@ -115,7 +115,7 @@ public class MonopolyRoll extends ListenerAdapter {
         total = diceRoll1 + diceRoll2;
 
         rollCount = "Roll Counts : " + countRoll;
-        getMessages(firstRoll, firstDoubleRoll, secondRoll, secondDoubleRoll, jail, rollCount);
+        getMessages(firstRoll, firstDoubleRoll, secondRoll, secondDoubleRoll, secondRoll, jail, rollCount);
 
         return total;
     }
@@ -146,6 +146,7 @@ public class MonopolyRoll extends ListenerAdapter {
                                    String firstDoubleRoll,
                                    String secondRoll,
                                    String secondDoubleRoll,
+                                   String thirdRoll,
                                    String jail,
                                    String countRoll) {
 
@@ -153,6 +154,7 @@ public class MonopolyRoll extends ListenerAdapter {
         mFirstDoubleRoll = firstDoubleRoll;
         mSecondRoll = secondRoll;
         mSecondDoubleRoll = secondDoubleRoll;
+        mSecondRoll = thirdRoll;
         mJail = jail;
         mCountRoll = countRoll;
     }
