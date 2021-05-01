@@ -3,11 +3,20 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+
 import javax.security.auth.login.LoginException;
 import java.util.Objects;
 
 public class MonopolyRoll extends ListenerAdapter {
     public static GuildMessageReceivedEvent eventGlobal;
+    private static String mUserName;
+    private static String mFirstRoll;
+    private static String mFirstDoubleRoll;
+    private static String mSecondRoll;
+    private static String mSecondDoubleRoll;
+    private static String mJail;
+    private static String mCountRoll;
+    private static String mTotalRolled;
 
     public static void main(String[] args) throws LoginException {
 
@@ -34,15 +43,16 @@ public class MonopolyRoll extends ListenerAdapter {
         String getMessage = event.getMessage().getContentRaw();
         if (getMessage.equalsIgnoreCase("!roll")) {
 
-            event.getChannel().sendMessage("Roller Name : " + Objects.requireNonNull(event.getMember()).getUser().getName()).queue();
-            event.getChannel().sendMessage("Total : " + monopolyRoll(6)).queue();
+            String userName = "Roller Name : " + Objects.requireNonNull(event.getMember()).getUser().getName();
+            String rolledTotal = "Total : " + monopolyRoll(6);
 
+            getMessages(userName, rolledTotal);
         }
-        
+
         if (getMessage.equalsIgnoreCase("!help")) {
             event.getChannel().sendMessage("Just type !roll to activate me -_-, ugh! such headache.").queue();
         }
-        
+
         if (getMessage.equalsIgnoreCase("!invite")) {
             event.getChannel().sendMessage(System.getenv().get("INVITE")).queue();
         }
@@ -50,6 +60,9 @@ public class MonopolyRoll extends ListenerAdapter {
         if (getMessage.equalsIgnoreCase("HiBot")) {
             event.getChannel().sendMessage(messages[randomMessages(3)]).queue();
         }
+
+        MonopolyRollAdapter monopolyRollAdapter = new MonopolyRollAdapter();
+        monopolyRollAdapter.getMessage();
     }
 
     public int monopolyRoll(int sides) {
@@ -59,11 +72,18 @@ public class MonopolyRoll extends ListenerAdapter {
         int total;
         int countRoll = 1;
 
-        eventGlobal.getChannel().sendMessage("Dice 1 : " + diceRoll1 + "\n" + "Dice 2 : " + diceRoll2).queue();
+        String firstRoll = "";
+        String firstDoubleRoll = "";
+        String secondRoll = "";
+        String secondDoubleRoll = "";
+        String jail = "";
+        String rollCount = "";
+
+        firstRoll = "Dice 1 : " + diceRoll1 + "\n" + "Dice 2 : " + diceRoll2;
 
         if (diceRoll1 == diceRoll2) {
 
-            eventGlobal.getChannel().sendMessage("Wow It's a Rolling Double!" + "\n" + "Rolled again!").queue();
+            firstDoubleRoll = "Wow It's a Rolling Double!" + "\n" + "Rolled again!";
 
             while (diceRoll1 == diceRoll2) {
 
@@ -74,11 +94,11 @@ public class MonopolyRoll extends ListenerAdapter {
                 diceRoll2 = diceRoll2 + diceRoll4;
                 countRoll += 1;
 
-                eventGlobal.getChannel().sendMessage("Dice 1 : " + diceRoll3 + "\n" + "Dice 2 : " + diceRoll4).queue();
+                secondRoll = "Dice 1 : " + diceRoll3 + "\n" + "Dice 2 : " + diceRoll4;
 
                 if (countRoll == 2) {
                     if (diceRoll3 == diceRoll4) {
-                        eventGlobal.getChannel().sendMessage("Wow! You got some luck!" + "\n" + "Rolled again!").queue();
+                        secondDoubleRoll = "Wow! You got some luck!" + "\n" + "Rolled again!";
                     }
                 }
 
@@ -86,8 +106,8 @@ public class MonopolyRoll extends ListenerAdapter {
 
                     if (diceRoll1 == diceRoll2) {
 
-                        eventGlobal.getChannel().sendMessage("You choose to go to hell!").queue();
-                        eventGlobal.getChannel().sendMessage("Roll Counts : " + countRoll).queue();
+                        jail = "You choose to go to hell!";
+                        rollCount = "Roll Counts : " + countRoll;
                         return -1;
                     }
                 }
@@ -95,7 +115,9 @@ public class MonopolyRoll extends ListenerAdapter {
         }
         total = diceRoll1 + diceRoll2;
 
-        eventGlobal.getChannel().sendMessage("Roll Counts : " + countRoll).queue();
+        rollCount = "Roll Counts : " + countRoll;
+        getMessages(firstRoll, firstDoubleRoll, secondRoll, secondDoubleRoll, jail, rollCount);
+
         return total;
     }
 
@@ -114,5 +136,61 @@ public class MonopolyRoll extends ListenerAdapter {
         randomNumber = randomNumber * arraySize;
 
         return (int) randomNumber;
+    }
+
+    public static void getMessages(String userName, String totalRolled) {
+        mUserName = userName;
+        mTotalRolled = totalRolled;
+    }
+
+    public static void getMessages(String firstRoll,
+                                   String firstDoubleRoll,
+                                   String secondRoll,
+                                   String secondDoubleRoll,
+                                   String jail,
+                                   String countRoll) {
+
+        mFirstRoll = firstRoll;
+        mFirstDoubleRoll = firstDoubleRoll;
+        mSecondRoll = secondRoll;
+        mSecondDoubleRoll = secondDoubleRoll;
+        mJail = jail;
+        mCountRoll = countRoll;
+    }
+
+    public String getUserName() {
+        return mUserName;
+    }
+
+    public String getFirstRoll() {
+        return mFirstRoll;
+    }
+
+    public String getFirstDoubleRoll() {
+        return mFirstDoubleRoll;
+    }
+
+    public String getSecondRoll() {
+        return mSecondRoll;
+    }
+
+    public String getSecondDoubleRoll() {
+        return mSecondDoubleRoll;
+    }
+
+    public String getJail() {
+        return mJail;
+    }
+
+    public String getCountRoll() {
+        return mCountRoll;
+    }
+
+    public String getTotalRolled() {
+        return mTotalRolled;
+    }
+
+    public GuildMessageReceivedEvent getEventGlobal() {
+        return eventGlobal;
     }
 }
