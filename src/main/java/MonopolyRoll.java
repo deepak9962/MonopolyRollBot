@@ -31,6 +31,9 @@ public class MonopolyRoll extends ListenerAdapter {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        MonopolyRollAdapter monopolyRollAdapter = new MonopolyRollAdapter();
+        monopolyRollAdapter.getMessage();
     }
 
     @Override
@@ -60,9 +63,6 @@ public class MonopolyRoll extends ListenerAdapter {
         if (getMessage.equalsIgnoreCase("HiBot")) {
             event.getChannel().sendMessage(messages[randomMessages(3)]).queue();
         }
-
-        MonopolyRollAdapter monopolyRollAdapter = new MonopolyRollAdapter();
-        monopolyRollAdapter.getMessage();
     }
 
     public int monopolyRoll(int sides) {
