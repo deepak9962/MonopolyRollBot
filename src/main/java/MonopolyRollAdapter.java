@@ -21,8 +21,8 @@ public class MonopolyRollAdapter {
         countRoll = getMessages.getCountRoll();
         totalRolled = getMessages.getTotalRolled();
 
-        String messages = "```" + userName + "\n" + firstRoll + "\n" + firstDoubleRoll + "\n" + secondRoll + "\n" +
-                secondDoubleRoll + "\n" + jail + "\n" + countRoll + "\n" + totalRolled + "```";
+        String messages = "```" + "\n" + userName + "\n" + firstRoll + "\n" + firstDoubleRoll + "\n" + secondRoll + "\n" +
+                secondDoubleRoll + "\n" + jail + "\n" + countRoll + "\n" + totalRolled + "\n" + "```";
 
         getMessages.getEventGlobal().getChannel().sendMessage(messages).queue();
     }
