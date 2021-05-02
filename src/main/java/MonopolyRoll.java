@@ -16,7 +16,7 @@ public class MonopolyRoll extends ListenerAdapter {
 
         try {
             while (true) {
-                Thread.sleep(60 * 1000);
+                Thread.sleep(60 * 15000);
                 eventGlobal.getChannel().sendMessage("").queue();
             }
         } catch (InterruptedException e) {
