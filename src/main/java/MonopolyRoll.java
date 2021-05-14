@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class MonopolyRoll extends ListenerAdapter {
     public static GuildMessageReceivedEvent eventGlobal;
+    private String prefix = "!";
 
     public static void main(String[] args) throws LoginException {
 
@@ -32,18 +33,22 @@ public class MonopolyRoll extends ListenerAdapter {
                 "Imma MF, leave me alone."};
         eventGlobal = event;
         String getMessage = event.getMessage().getContentRaw();
-        if (getMessage.equalsIgnoreCase("!roll")) {
+        if (getMessage.equalsIgnoreCase(prefix + "roll")) {
 
             event.getChannel().sendMessage("Roller Name : " + Objects.requireNonNull(event.getMember()).getUser().getName()).queue();
             event.getChannel().sendMessage("Total : " + monopolyRoll(6)).queue();
 
         }
-        
-        if (getMessage.equalsIgnoreCase("!help")) {
-            event.getChannel().sendMessage("Just type !roll to activate me -_-, ugh! such headache.").queue();
+
+        if (getMessage.equalsIgnoreCase(prefix + "guessTheNumber")) {
+            guessTheNumber();
         }
         
-        if (getMessage.equalsIgnoreCase("!invite")) {
+        if (getMessage.equalsIgnoreCase(prefix + "help")) {
+            event.getChannel().sendMessage("Just type !roll or !guessTheNumber to activate me -_-, ugh! such headache.").queue();
+        }
+        
+        if (getMessage.equalsIgnoreCase(prefix + "invite")) {
             event.getChannel().sendMessage(System.getenv().get("INVITE")).queue();
         }
 
@@ -114,5 +119,35 @@ public class MonopolyRoll extends ListenerAdapter {
         randomNumber = randomNumber * arraySize;
 
         return (int) randomNumber;
+    }
+
+    public void guessTheNumber() {
+
+        boolean hasWin = false;
+        eventGlobal.getChannel().sendMessage("Hi! I have guess the random number for you! \n Try to guess it.").queue();
+        int randomNumber = (int) (Math.random() * 100) + 1;
+
+        for (int i = 10; i > 0; i--) {
+
+            int guess;
+            eventGlobal.getChannel().sendMessage("You have " + i + " guess(es) left.").queue();
+            String getInput = eventGlobal.getMessage().getContentRaw();
+            guess = Integer.parseInt(getInput);
+
+            if (randomNumber < guess) {
+                eventGlobal.getChannel().sendMessage("Number is less than " + guess + " Try again.").queue();
+            } else if (randomNumber > guess) {
+                eventGlobal.getChannel().sendMessage("Number is greater than " + guess + " Try again.").queue();
+            } else {
+                hasWin = true;
+                break;
+            }
+        }
+        if (hasWin) {
+            eventGlobal.getChannel().sendMessage("CORRECT... YOU WON! '-_-'").queue();
+        } else {
+            eventGlobal.getChannel().sendMessage("GAME OVER! YOU LOSE! HAHA").queue();
+            eventGlobal.getChannel().sendMessage("The number was " + randomNumber).queue();
+        }
     }
 }
