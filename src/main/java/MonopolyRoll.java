@@ -124,6 +124,8 @@ public class MonopolyRoll extends ListenerAdapter {
     public void guessTheNumber() {
 
         boolean hasWin = false;
+        String getInput = eventGlobal.getMessage().getContentRaw();
+
         eventGlobal.getChannel().sendMessage("Hi! I have guess the random number for you! \n Try to guess it.").queue();
         int randomNumber = (int) (Math.random() * 100) + 1;
 
@@ -131,7 +133,6 @@ public class MonopolyRoll extends ListenerAdapter {
 
             int guess;
             eventGlobal.getChannel().sendMessage("You have " + i + " guess(es) left.").queue();
-            String getInput = eventGlobal.getMessage().getContentRaw();
             guess = Integer.parseInt(getInput);
 
             if (randomNumber < guess) {
