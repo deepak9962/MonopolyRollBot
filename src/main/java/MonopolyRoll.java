@@ -28,9 +28,9 @@ public class MonopolyRoll extends ListenerAdapter {
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
         super.onGuildMessageReceived(event);
-        String[] messages = {"Fuck me! I'm not in the mood right now. -_-",
+        String[] messages = {"I'm not in the mood right now. -_-",
                 "Get Lost I said already. Stop bulling me. '-_-'",
-                "Imma MF, leave me alone."};
+                "Imma Stupid, leave me alone."};
         eventGlobal = event;
         String getMessage = event.getMessage().getContentRaw();
         if (getMessage.equalsIgnoreCase(prefix + "roll")) {
